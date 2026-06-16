@@ -948,8 +948,7 @@ docker logs nextcloud-redis
 ## Configuration Locations
 
 ```text
-stacks/nextcloud/compose.yml
-stacks/nextcloud/.env
+stacks/nextcloud/
 data/nextcloud/
 logs/nextcloud/
 ```
