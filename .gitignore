@@ -7,6 +7,7 @@
 *.env.local
 *.env.production
 *.env.staging
+README_INTERNAL.md
 
 # Do NOT ignore example env files
 !*.env.example
