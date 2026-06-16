@@ -58,7 +58,7 @@ services:
       NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_HOST}
       OVERWRITEHOST: ${NEXTCLOUD_HOST}
       OVERWRITEPROTOCOL: https
-      TRUSTED_PROXIES: traefik
+      TRUSTED_PROXIES: ${NEXTCLOUD_TRUSTED_PROXIES}
 
       REDIS_HOST: nextcloud-redis
 
@@ -88,7 +88,7 @@ services:
       - "traefik.http.middlewares.nextcloud-dav.redirectregex.replacement=https://$${1}/remote.php/dav/"
       - "traefik.http.middlewares.nextcloud-dav.redirectregex.permanent=true"
 
-      - "traefik.http.routers.nextcloud.middlewares=nextcloud-dav"
+      - "traefik.http.routers.nextcloud.middlewares=nextcloud-dav,security-headers@file"
 
   nextcloud-cron:
     image: nextcloud:apache
