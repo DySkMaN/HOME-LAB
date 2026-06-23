@@ -1,55 +1,262 @@
-# Homelab Build Roadmap
+# Homelab Infrastructure Platform
 
 ## Overview
 
-This homelab is a self-hosted infrastructure project designed to develop and demonstrate practical skills across systems administration, networking, DevOps, security, observability, automation, and operational resilience.
+This repository contains the design, deployment, operation, and documentation of a self-hosted Homelab environment built to develop practical experience in systems administration, networking, security, monitoring, backup and recovery, and infrastructure operations.
 
-The environment is built using Docker Compose and organized into logical service stacks. Each phase introduces additional technologies and operational practices while building upon the foundation established in previous phases.
+The platform is designed using a phased implementation approach and incorporates technologies and operational practices commonly found in modern enterprise environments.
 
-The project prioritizes:
-
-* Documentation
-* Security
-* Recoverability
-* Automation
-* Operational maturity
-* Continuous learning
-
-The goal is to create an environment that reflects many of the practices used in modern production infrastructure while remaining maintainable, recoverable, and well documented.
+The primary goal of this project is to gain hands-on experience building, operating, documenting, monitoring, securing, and recovering infrastructure while demonstrating industry-relevant skills.
 
 ---
 
 # Objectives
 
-The primary objectives of this project are to:
+This Homelab has been built to develop practical experience in:
 
-* Develop practical Linux administration skills
-* Gain experience operating containerized infrastructure
-* Learn networking, DNS, reverse proxying, and secure remote access
-* Implement monitoring and observability platforms
-* Develop security operations capabilities
-* Practice backup and disaster recovery procedures
-* Maintain production-style documentation
-* Demonstrate infrastructure automation and operational maturity
-* Create a public portfolio showcasing technical skills
-
----
-
-# Build Phases
-
-| Phase | Name                 | Focus                                                      |
-| ----- | -------------------- | ---------------------------------------------------------- |
-| 0     | Platform Preparation | Operating system, automation, backups and power protection |
-| 1     | Foundation           | Core infrastructure and public services                    |
-| 2     | Observability        | Monitoring, logging and alerting                           |
-| 3     | Security             | Identity management and security monitoring                |
-| 4     | Productivity         | Internal productivity applications                         |
-| 5     | Expansion            | Additional storage, utilities and learning services        |
-| 6     | NAS & Media          | Media services and NAS integration                         |
+* Linux Administration
+* Docker & Containerisation
+* Infrastructure Operations
+* Reverse Proxy Technologies
+* Cloud Networking
+* Monitoring & Observability
+* Identity & Access Management
+* Backup & Disaster Recovery
+* Security Operations
+* Technical Documentation
 
 ---
 
-# Phase Documents
+# Skills Demonstrated
+
+## Infrastructure
+
+* Ubuntu Server
+* Docker Engine
+* Docker Compose
+* Linux Systems Administration
+* Service Management
+
+## Networking
+
+* Reverse Proxy Design
+* Cloudflare Tunnel
+* DNS Management
+* Service Routing
+* Container Networking
+
+## Monitoring
+
+* Grafana
+* Prometheus
+* Node Exporter
+* Metrics Collection
+* Performance Analysis
+
+## Security
+
+* Vaultwarden
+* VPN Services
+* Access Control
+* Credential Management
+* Service Exposure Management
+
+## Operations
+
+* Backup Strategy Design
+* Disaster Recovery Planning
+* Change Management
+* Technical Documentation
+* Incident Troubleshooting
+
+---
+
+# Architecture Overview
+
+```mermaid
+flowchart TD
+
+Internet --> Cloudflare
+Cloudflare --> CloudflareTunnel
+CloudflareTunnel --> Traefik
+
+Traefik --> Websites
+Traefik --> Nextcloud
+Traefik --> Vaultwarden
+
+NodeExporter --> Prometheus
+Prometheus --> Grafana
+
+Nextcloud --> NAS
+Plex --> NAS
+qBittorrent --> NAS
+```
+
+---
+
+# Current Platform Status
+
+The table below reflects the current deployment status of services within the Homelab environment.
+
+| Stack          | Service            | Status        |
+| -------------- | ------------------ | ------------- |
+| Proxy          | Traefik            | ✅ Operational |
+| Proxy          | Cloudflare Tunnel  | ✅ Operational |
+| HTTP           | Nginx (www)        | ✅ Operational |
+| HTTP           | Nginx (tafe)       | ✅ Operational |
+| Monitoring     | Grafana            | 🚧 Planned    |
+| Monitoring     | Prometheus         | 🚧 Planned    |
+| Monitoring     | Node Exporter      | 🚧 Planned    |
+| Security       | Vaultwarden        | ✅ Operational |
+| Security       | VPN                | 🚧 Planned    |
+| Storage        | Nextcloud          | ✅ Operational |
+| Media          | Plex               | 🚧 Planned    |
+| Media          | qBittorrent        | 🚧 Planned    |
+| Infrastructure | UPS Integration    | 🚧 Planned    |
+| Infrastructure | Automated Recovery | 🚧 Planned    |
+
+---
+
+# Homelab Progress
+
+The platform is being developed using a phased implementation model.
+
+| Phase   | Description          | Status         |
+| ------- | -------------------- | -------------- |
+| Phase 0 | Platform Preparation | ✅ Complete     |
+| Phase 1 | Foundation           | ✅ Complete     |
+| Phase 2 | Observability        | 🚧 In Progress |
+| Phase 3 | Security             | 🚧 In Progress |
+| Phase 4 | Productivity         | 🚧 In Progress |
+| Phase 5 | Expansion            | ⏳ Planned      |
+| Phase 6 | NAS & Media          | ⏳ Planned      |
+
+---
+
+# Target State Architecture
+
+```mermaid
+flowchart TD
+
+Internet --> Cloudflare
+Cloudflare --> Tunnel
+Tunnel --> Traefik
+
+Traefik --> WWW
+Traefik --> TAFE
+Traefik --> Nextcloud
+Traefik --> Vaultwarden
+
+NodeExporter --> Prometheus
+Prometheus --> Grafana
+
+VPN --> InternalServices
+
+Nextcloud --> NAS
+Plex --> NAS
+qBittorrent --> NAS
+
+UPS --> AutomatedShutdown
+UPS --> AutomatedStartup
+```
+
+---
+
+# Roadmap
+
+## Short Term
+
+* Deploy Node Exporter
+* Deploy Prometheus
+* Deploy Grafana
+* Build monitoring dashboards
+* Deploy VPN services
+* Complete monitoring documentation
+
+### Target Outcome
+
+Establish full infrastructure visibility and secure administrative access.
+
+---
+
+## Medium Term
+
+* Implement UPS integration
+* Automate graceful shutdown procedures
+* Automate startup recovery procedures
+* Implement backup validation testing
+* Expand disaster recovery runbooks
+
+### Target Outcome
+
+Improve resilience and reduce operational risk during outages and recovery events.
+
+---
+
+## Long Term
+
+* Deploy NAS infrastructure
+* Deploy Plex
+* Deploy qBittorrent
+* Implement centralised logging
+* Introduce security monitoring
+* Implement network segmentation
+* Expand automation and operational tooling
+
+### Target Outcome
+
+Transition the environment into a mature, fully documented, monitored, and recoverable infrastructure platform.
+
+---
+
+# Planned End State
+
+Upon completion, the platform will provide:
+
+* Secure Remote Access
+* Reverse Proxy Services
+* Website Hosting
+* Infrastructure Monitoring
+* Password Management
+* Private Cloud Storage
+* Media Streaming
+* Automated Backup Operations
+* Disaster Recovery Procedures
+* UPS-Based Power Protection
+* Comprehensive Infrastructure Documentation
+
+The project is intentionally built using a phased approach to demonstrate not only technical implementation skills, but also planning, documentation, operational management, security, monitoring, and recovery practices commonly found in enterprise environments.
+
+---
+
+# Documentation
+
+## Architecture
+
+Location:
+
+```text
+docs/architecture/
+```
+
+Documents:
+
+* DESIGN.md
+* NETWORK_OVERVIEW.md
+* SECURITY_MODEL.md
+* BACKUP_STRATEGY.md
+
+---
+
+## Build Plans
+
+Location:
+
+```text
+docs/build-plan/
+```
+
+Documents:
 
 * PHASE_0_PLATFORM_PREPARATION.md
 * PHASE_1_FOUNDATION.md
@@ -61,412 +268,268 @@ The primary objectives of this project are to:
 
 ---
 
-# Current Service Roadmap
+## Network Diagrams
 
-## Phase 0 - Platform Preparation
+Location:
 
-### Core Platform
+```text
+docs/network-diagrams/
+```
 
-* Ubuntu Server
-* OpenSSH
+Contains:
 
-### Infrastructure
-
-* Docker Engine
-* Docker Compose
-* Git
-* VPN-based Remote Administration
-
-### Operations
-
-* Daily Backup Script
-* Weekly Backup Script
-* Monthly Backup Process
-* Restore Script
-
-### Power Protection
-
-* UPS
-* Automated Shutdown Script
-* Automated Startup Script
-
-### Documentation
-
-* Git Repository
-* Documentation Standards
-* Troubleshooting Standards
+* Phase Diagrams
+* Service Flow Diagrams
+* Final Architecture Diagrams
 
 ---
 
-## Phase 1 - Foundation
+## Runbooks
 
-### Proxy
+Location:
 
-* Traefik
-* Cloudflare Tunnel
+```text
+docs/runbooks/
+```
 
-### HTTP
+Documents:
 
-* Public Website
-* Project Website
-
-### Management
-
-* Dockhand
-
-### Security
-
-* Vaultwarden
-
-### Storage
-
-* Nextcloud
+* BACKUP_RESTORE.md
+* DISASTER_RECOVERY.md
+* PLATFORM_REBUILD.md
+* POWER_OUTAGE_PROCEDURE.md
+* UPS_OPERATIONS.md
+* CHANGE_MANAGEMENT.md
 
 ---
 
-## Phase 2 - Observability
+## Standards
 
-### Monitoring
+Location:
 
-* Prometheus
-* Grafana
-* Node Exporter
-* cAdvisor
-* Loki
-* Alloy
+```text
+docs/standards/
+```
 
-### Management
+Documents:
 
-* Dozzle
-* Uptime Kuma
-
----
-
-## Phase 3 - Security
-
-### Security
-
-* Authentik
-* CrowdSec
-* Wazuh
-
-### Infrastructure
-
-* Pi-hole
+* DOCUMENTATION_STANDARD.md
+* SERVICE_DOCUMENTATION_STANDARD.md
+* TROUBLESHOOTING_STANDARD.md
+* SECURITY_DISCLOSURE_POLICY.md
 
 ---
 
-## Phase 4 - Productivity
-
-### Management
-
-* Homepage
-
-### Productivity
-
-* Paperless-NGX
-* Vikunja
-* BookStack
-
-### Applications
-
-* Mealie
-* FreshRSS
-* Wallos
-* Linkding
-
-### Utilities
-
-* IT-Tools
-* Stirling-PDF
-
-### Infrastructure
-
-* ntfy
-
----
-
-## Phase 5 - Expansion
-
-### Storage
-
-* Immich
-* MinIO
-
-### Applications
-
-* Actual Budget
-
-### Utilities
-
-* ChangeDetection.io
-* PrivateBin
-
-### Infrastructure
-
-* Gluetun
-
----
-
-## Phase 6 - NAS & Media
-
-### Media
-
-* Jellyfin
-* qBittorrent
-* Prowlarr
-* Sonarr
-* Radarr
-
----
-
-# Operational Resilience
-
-A major objective of this project is developing operational practices commonly used in enterprise environments.
-
-The homelab is designed not only to host services but also to demonstrate backup management, disaster recovery, business continuity planning, automation, and infrastructure maintenance.
-
-## Backup Strategy
-
-The environment follows a multi-tier backup approach.
-
-### Daily Backups
-
-Purpose:
-
-* Protect frequently changing application data
-* Protect Docker volumes
-* Protect configuration files
-* Enable rapid recovery from accidental changes
-
-Destination:
-
-* Secondary internal storage
-
-Retention:
-
-* 7 days
-
-### Weekly Backups
-
-Purpose:
-
-* Create complete recoverable snapshots of the environment
-
-Destination:
-
-* External storage
-
-Retention:
-
-* 4 weeks
-
-### Monthly Backups
-
-Purpose:
-
-* Maintain an off-site recovery copy
-
-Destination:
-
-* Cloud storage
-
-Retention:
-
-* Long-term archival
-
----
-
-## Disaster Recovery
-
-The environment is designed so that services can be rebuilt using:
-
-* Docker Compose files
-* Environment configuration
-* Documentation
-* Backup archives
-* Recovery procedures
-
-This approach ensures container loss does not result in service loss.
-
----
-
-## Power Protection
-
-The environment includes a UPS (Uninterruptible Power Supply) to protect against:
-
-* Power outages
-* Brownouts
-* Unexpected shutdowns
-* Filesystem corruption
-* Database corruption
-
-### Low Battery Shutdown Procedure
-
-When battery capacity reaches a defined threshold:
-
-1. Stop media and non-critical services
-2. Stop application services
-3. Stop monitoring services
-4. Stop storage services
-5. Stop security services
-6. Stop proxy services
-7. Flush filesystem buffers
-8. Gracefully shut down the operating system
-
-### Power Restoration Procedure
-
-When power returns:
-
-1. Host system powers on automatically
-2. Core networking services start
-3. Proxy services start
-4. Storage services start
-5. Security services start
-6. Monitoring services start
-7. Application services start
-8. Health validation checks execute
-
----
-
-## Change Management
-
-Major infrastructure changes are:
-
-* Documented before deployment
-* Tested after deployment
-* Included in backup validation procedures
-* Recorded in troubleshooting documentation
-
-This approach helps ensure services remain recoverable, maintainable, and auditable over time.
-
----
-
-## Documentation Standards
-
-Every deployed service follows a documentation-first approach.
-
-Each service includes:
-
-* README.md
-* README_INTERNAL.md
-* TROUBLESHOOTING.md
-* Docker Compose configuration
-* Environment variable examples
-
-Documentation covers:
-
-* Deployment
-* Configuration
-* Validation
-* Troubleshooting
-* Backup procedures
-* Recovery procedures
-
----
-
-## Skills Demonstrated
-
-### Systems Administration
-
-* Linux Administration
-* Service Management
-* Filesystem Management
-* System Hardening
-
-### Networking
-
-* DNS
-* Reverse Proxying
-* Cloudflare Integration
-* Secure Remote Access
-* VPN Technologies
-
-### DevOps
-
-* Docker
-* Docker Compose
-* Git
-* Infrastructure Documentation
-* Automation
-
-### Monitoring
-
-* Metrics Collection
-* Logging
-* Dashboard Development
-* Availability Monitoring
-
-### Security
-
-* Identity Management
-* Single Sign-On
-* Threat Detection
-* Security Monitoring
-* Access Control
-
-### Operations
-
-* Backup Management
-* Disaster Recovery
-* Business Continuity Planning
-* Change Management
-* Incident Response
-
----
-
-# Final Target Architecture
-
-```mermaid
-flowchart LR
-
-Internet --> Cloudflare
-Cloudflare --> Tunnel
-Tunnel --> Traefik
-
-Traefik --> Websites
-Traefik --> Applications
-Traefik --> Storage
-Traefik --> Monitoring
-Traefik --> Productivity
-
-Monitoring --> Grafana
-Monitoring --> Prometheus
-Monitoring --> Loki
-
-Security --> Authentik
-Security --> CrowdSec
-Security --> Wazuh
-
-Storage --> Nextcloud
-Storage --> Immich
-Storage --> MinIO
-
-Media --> Jellyfin
-Media --> Sonarr
-Media --> Radarr
-Media --> qBittorrent
-
-NAS --> Media
-
-UPS --> GracefulShutdown
-GracefulShutdown --> Services
-
-BackupSystem --> InternalStorage
-BackupSystem --> ExternalStorage
-BackupSystem --> CloudStorage
+# Repository Structure
+
+```text
+homelab/
+│
+├── docs/
+│   ├── architecture/
+│   ├── build-plan/
+│   ├── network-diagrams/
+│   ├── runbooks/
+│   └── standards/
+│
+├── stacks/
+│   ├── proxy/
+│   ├── http/
+│   ├── monitoring/
+│   ├── security/
+│   ├── storage/
+│   └── media/
+│
+├── data/
+├── logs/
+├── scripts/
+├── backups/
+├── secrets/
+└── shared/
 ```
 
 ---
 
-# Guiding Principles
+# Key Features
 
-* Documentation before expansion
-* Backups before major changes
-* Security by default
-* Recoverability over complexity
-* Automation where it improves reliability
-* Continuous learning through implementation
-* Operational maturity over feature count
+* Reverse Proxy Architecture
+* Zero Trust Ingress Design
+* Infrastructure Monitoring
+* Password Management
+* Private Cloud Storage
+* Automated Backups
+* Disaster Recovery Planning
+* UPS Shutdown Automation
+* Infrastructure Documentation
+* Multi-Phase Build Strategy
 
-The objective is to build a stable, secure, recoverable, and well-documented environment that demonstrates practical systems administration, networking, security, observability, and DevOps capabilities.
+---
+
+# Backup and Recovery
+
+The platform follows a three-tier backup strategy.
+
+## Daily Backup (Son)
+
+Protects frequently changing application and configuration data.
+
+Examples:
+
+* Website content
+* Service configurations
+* Application data
+* Databases
+
+Retention:
+
+* 7 Days
+
+---
+
+## Weekly Backup (Father)
+
+Provides recoverable platform snapshots.
+
+Examples:
+
+* Docker volumes
+* Service data
+* Application exports
+
+Retention:
+
+* 4 Weeks
+
+---
+
+## Monthly Backup (Grandfather)
+
+Provides long-term disaster recovery capability.
+
+Examples:
+
+* Infrastructure archives
+* Critical service data
+* Historical backups
+
+Storage:
+
+* Off-site storage
+
+---
+
+Supporting documentation:
+
+```text
+docs/architecture/BACKUP_STRATEGY.md
+docs/runbooks/BACKUP_RESTORE.md
+docs/runbooks/DISASTER_RECOVERY.md
+```
+
+---
+
+# Technology Stack
+
+## Operating System
+
+* Ubuntu Server
+
+## Container Platform
+
+* Docker
+* Docker Compose
+
+## Networking
+
+* Traefik
+* Cloudflare Tunnel
+
+## Monitoring
+
+* Grafana
+* Prometheus
+* Node Exporter
+
+## Security
+
+* Vaultwarden
+* VPN
+
+## Storage
+
+* Nextcloud
+* NAS (Planned)
+
+## Media
+
+* Plex (Planned)
+* qBittorrent (Planned)
+
+---
+
+# Operational Focus Areas
+
+The environment places strong emphasis on:
+
+* Documentation
+* Security
+* Recoverability
+* Monitoring
+* Backup Validation
+* Disaster Recovery
+* Change Management
+* Automation
+* Infrastructure Operations
+
+---
+
+# Future Enhancements
+
+Planned future improvements include:
+
+* Centralised Logging
+* CrowdSec
+* Wazuh
+* Uptime Monitoring
+* Security Monitoring
+* Configuration Management
+* Infrastructure Automation
+* Network Segmentation
+* NAS Expansion
+* Backup Validation Automation
+* Recovery Testing Automation
+
+---
+
+# Learning Outcomes
+
+This Homelab is designed as a practical learning platform focused on building real-world infrastructure skills.
+
+The objective is not simply to deploy services, but to operate them using documentation, procedures, monitoring, security controls, backup strategies, and recovery processes that mirror practices commonly used in professional IT environments.
+
+Through this project I am developing hands-on experience in:
+
+* Linux Administration
+* Systems Administration
+* Networking
+* Docker
+* Monitoring
+* Security
+* Infrastructure Operations
+* Technical Documentation
+* Backup & Recovery
+* Platform Lifecycle Management
+
+---
+
+# Guiding Principle
+
+Infrastructure should be:
+
+* Secure
+* Documented
+* Observable
+* Recoverable
+* Maintainable
+
+Technology changes. Operational discipline scales.
