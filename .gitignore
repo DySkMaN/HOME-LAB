@@ -36,8 +36,6 @@ volumes/
 data/
 docker-data/
 secrets/
-scripts/backups/
-scripts/restores/
 *.db
 
 
