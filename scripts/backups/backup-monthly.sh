@@ -392,6 +392,9 @@ copy_backup_sources
 create_manifest
 create_archive
 verify_backup
+
+"${HOMELAB_ROOT}/scripts/backups/upload-cloud.sh" "${BACKUP_FILE}" "monthly"
+
 rotate_backups
 
 log "Monthly backup completed successfully"

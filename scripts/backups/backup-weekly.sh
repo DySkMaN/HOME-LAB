@@ -366,6 +366,9 @@ stop_services_for_consistency
 copy_backup_sources
 create_archive
 verify_backup
+
+"${HOMELAB_ROOT}/scripts/backups/upload-cloud.sh" "${BACKUP_FILE}" "weekly"
+
 rotate_backups
 
 log "Weekly backup completed successfully"
